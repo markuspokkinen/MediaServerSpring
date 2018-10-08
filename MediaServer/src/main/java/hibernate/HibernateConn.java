@@ -1,29 +1,31 @@
 package hibernate;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.exception.JDBCConnectionException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class HibernateConn {
-
-	private Session OpenConnectionToDataBase() {
-		SessionFactory sessFac = null;
-
-		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-		System.out.println("Configuration tiedosto ladattu");
-
-		try {
-			sessFac = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		Session sess = sessFac.openSession();
-		return sess;
+	public HibernateConn() {
+		
 	}
+
+	private EntityManager openConnectionToDataBase() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("MediaServer");
+		System.out.println("EMF kehitetty");
+		EntityManager em = emf.createEntityManager();
+		
+		return em;
+	}
+	public List<Users[]> findUser(String user) {
+		EntityManager em = openConnectionToDataBase();
+		Query k = em.createQuery("SELECT * from Users WHERE Email ="+user);
+		List<Users[]> tulos = k.getResultList();
+		em.close();
+		return tulos;
+	}
+	
+	
 }

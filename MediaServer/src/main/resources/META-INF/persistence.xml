@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="MediaServer">
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<class>hibernate.Movies</class>
+	<class>hibernate.Profiles</class>
+	<class>hibernate.Users</class>
+		<properties>
+			<property name="hibernate.connection.driver" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://10.114.32.14:3306/MediaServer" />
+			<property name="hibernate.connection.user" value="root" />
+			<property name="hibernate.connection.password" value="NokiaLumia930" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import hibernate.HibernateConn;
+import hibernate.Users;
 
 @Controller
 public class LoginController {
@@ -25,8 +26,8 @@ public class LoginController {
 
 		// loppu hibernatea
 		HibernateConn hc = new HibernateConn();
-		hc.findUser(email);
 
-		return new RedirectView("/Profiles");
+		return new RedirectView("/Login");
 	}
+
 }

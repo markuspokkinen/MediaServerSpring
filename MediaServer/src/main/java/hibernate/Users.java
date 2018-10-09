@@ -1,6 +1,8 @@
 package hibernate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -10,18 +12,29 @@ public class Users implements Serializable {
  
 
 	@Id
-	@Column(name="ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="username")
-	private String userName;
+	private String username;
 	
 	@Column(name="password")
 	private String password;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Profiles> profiles = new ArrayList<Profiles>();
 
-	public Users(int id,String userName, String password) {
+	
+	
+	public Users(int id, String username, String password, List<Profiles> profiles) {
 		this.id = id;
-		this.userName = userName;
+		this.username = username;
+		this.password = password;
+		this.profiles = profiles;
+	}
+
+	public Users(String userName, String password) {
+		this.username = userName;
 		this.password = password;
 	}
 
@@ -38,11 +51,11 @@ public class Users implements Serializable {
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 
 	public String getPassword() {
@@ -53,9 +66,11 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
-	
-	
-	
-	
-	
+	public List<Profiles> getProfiles() {
+		return profiles;
+	}
+
+	public void setProfiles(List<Profiles> profiles) {
+		this.profiles = profiles;
+	}
 }

@@ -30,6 +30,11 @@ public class Movies implements Serializable {
 		this.description = description;
 	}
 
+	public Movies(String moviename, String description) {
+		this.moviename = moviename;
+		this.description = description;
+	}
+
 	public Movies() {
 
 	}
@@ -56,6 +61,11 @@ public class Movies implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Movies [movieId=" + movieId + ", moviename=" + moviename + ", description=" + description + "]";
 	}
 	
 	
